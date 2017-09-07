@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/student/CarND-Capstone/ros/src
+CMAKE_SOURCE_DIR = /home/student/finalProject/systemIntegration/ros/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/student/CarND-Capstone/ros/build
+CMAKE_BINARY_DIR = /home/student/finalProject/systemIntegration/ros/build
 
 # Utility rule file for styx_msgs_gennodejs.
 
@@ -63,10 +63,10 @@ styx_msgs/CMakeFiles/styx_msgs_gennodejs.dir/build: styx_msgs_gennodejs
 .PHONY : styx_msgs/CMakeFiles/styx_msgs_gennodejs.dir/build
 
 styx_msgs/CMakeFiles/styx_msgs_gennodejs.dir/clean:
-	cd /home/student/CarND-Capstone/ros/build/styx_msgs && $(CMAKE_COMMAND) -P CMakeFiles/styx_msgs_gennodejs.dir/cmake_clean.cmake
+	cd /home/student/finalProject/systemIntegration/ros/build/styx_msgs && $(CMAKE_COMMAND) -P CMakeFiles/styx_msgs_gennodejs.dir/cmake_clean.cmake
 .PHONY : styx_msgs/CMakeFiles/styx_msgs_gennodejs.dir/clean
 
 styx_msgs/CMakeFiles/styx_msgs_gennodejs.dir/depend:
-	cd /home/student/CarND-Capstone/ros/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/student/CarND-Capstone/ros/src /home/student/CarND-Capstone/ros/src/styx_msgs /home/student/CarND-Capstone/ros/build /home/student/CarND-Capstone/ros/build/styx_msgs /home/student/CarND-Capstone/ros/build/styx_msgs/CMakeFiles/styx_msgs_gennodejs.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/student/finalProject/systemIntegration/ros/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/student/finalProject/systemIntegration/ros/src /home/student/finalProject/systemIntegration/ros/src/styx_msgs /home/student/finalProject/systemIntegration/ros/build /home/student/finalProject/systemIntegration/ros/build/styx_msgs /home/student/finalProject/systemIntegration/ros/build/styx_msgs/CMakeFiles/styx_msgs_gennodejs.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : styx_msgs/CMakeFiles/styx_msgs_gennodejs.dir/depend
 

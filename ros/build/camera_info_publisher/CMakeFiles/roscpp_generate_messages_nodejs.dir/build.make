@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/student/CarND-Capstone/ros/src
+CMAKE_SOURCE_DIR = /home/student/finalProject/systemIntegration/ros/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/student/CarND-Capstone/ros/build
+CMAKE_BINARY_DIR = /home/student/finalProject/systemIntegration/ros/build
 
 # Utility rule file for roscpp_generate_messages_nodejs.
 
@@ -63,10 +63,10 @@ camera_info_publisher/CMakeFiles/roscpp_generate_messages_nodejs.dir/build: rosc
 .PHONY : camera_info_publisher/CMakeFiles/roscpp_generate_messages_nodejs.dir/build
 
 camera_info_publisher/CMakeFiles/roscpp_generate_messages_nodejs.dir/clean:
-	cd /home/student/CarND-Capstone/ros/build/camera_info_publisher && $(CMAKE_COMMAND) -P CMakeFiles/roscpp_generate_messages_nodejs.dir/cmake_clean.cmake
+	cd /home/student/finalProject/systemIntegration/ros/build/camera_info_publisher && $(CMAKE_COMMAND) -P CMakeFiles/roscpp_generate_messages_nodejs.dir/cmake_clean.cmake
 .PHONY : camera_info_publisher/CMakeFiles/roscpp_generate_messages_nodejs.dir/clean
 
 camera_info_publisher/CMakeFiles/roscpp_generate_messages_nodejs.dir/depend:
-	cd /home/student/CarND-Capstone/ros/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/student/CarND-Capstone/ros/src /home/student/CarND-Capstone/ros/src/camera_info_publisher /home/student/CarND-Capstone/ros/build /home/student/CarND-Capstone/ros/build/camera_info_publisher /home/student/CarND-Capstone/ros/build/camera_info_publisher/CMakeFiles/roscpp_generate_messages_nodejs.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/student/finalProject/systemIntegration/ros/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/student/finalProject/systemIntegration/ros/src /home/student/finalProject/systemIntegration/ros/src/camera_info_publisher /home/student/finalProject/systemIntegration/ros/build /home/student/finalProject/systemIntegration/ros/build/camera_info_publisher /home/student/finalProject/systemIntegration/ros/build/camera_info_publisher/CMakeFiles/roscpp_generate_messages_nodejs.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : camera_info_publisher/CMakeFiles/roscpp_generate_messages_nodejs.dir/depend
 
