@@ -46,6 +46,16 @@ class DBWNode(object):
         max_lat_accel = rospy.get_param('~max_lat_accel', 3.)
         max_steer_angle = rospy.get_param('~max_steer_angle', 8.)
 
+
+        self.linear_velocity_future = None
+        self.angular_velocity_future = None
+        self.linear_velocity_current = None
+        self.angular_velocity_future = None
+        self.dwb_enabled = None
+
+
+        self.rate = 50 # Rate in Hz
+
         self.steer_pub = rospy.Publisher('/vehicle/steering_cmd',
                                          SteeringCmd, queue_size=1)
         self.throttle_pub = rospy.Publisher('/vehicle/throttle_cmd',
@@ -54,14 +64,19 @@ class DBWNode(object):
                                          BrakeCmd, queue_size=1)
 
         # TODO: Create `TwistController` object
-        # self.controller = TwistController(<Arguments you wish to provide>)
+        self.controller = Controller()
 
         # TODO: Subscribe to all the topics you need to
+        rospy.Subscriber('twist_cmd', TwistStamped, self.twistcmd_cb)
+        rospy.Subscriber('/current_velocity', TwistStamped, self.cur_vel_cb)
+        rospy.Subscriber('/vehicle/dbw_enabled', Bool, self.dwb_enabled_cb)
+
+
 
         self.loop()
 
     def loop(self):
-        rate = rospy.Rate(50) # 50Hz
+        rate = rospy.Rate(self.rate)
         while not rospy.is_shutdown():
             # TODO: Get predicted throttle, brake, and steering using `twist_controller`
             # You should only publish the control commands if dbw is enabled
@@ -91,6 +106,28 @@ class DBWNode(object):
         bcmd.pedal_cmd_type = BrakeCmd.CMD_TORQUE
         bcmd.pedal_cmd = brake
         self.brake_pub.publish(bcmd)
+
+
+    # TODO: Implement
+    def twistcmd_cb(self, msg):
+        self.linear_velocity_future = msg.twist.linear.x
+        self.angular_velocity_future = msg.twist.angular.z
+
+
+    # TODO: Implement
+    def cur_vel_cb(self, msg):
+        self.linear_velocity_current = msg.twist.linear.x
+        self.angular_velocity_future = mst.twist.angular.z
+
+
+    # TODO: Implement
+    def dwb_enabled_cb(self, msg)
+        self.dwb_enabled = msg.data
+
+        if (!self.dwb_enabled):
+            self.controller.reset()
+        
+        
 
 
 if __name__ == '__main__':
