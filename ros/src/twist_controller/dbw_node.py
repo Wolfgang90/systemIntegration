@@ -51,7 +51,8 @@ class DBWNode(object):
         self.angular_velocity_future = None
         self.linear_velocity_current = None
         self.angular_velocity_future = None
-        self.dwb_enabled = None
+        self.acceleration_current = None
+        self.dbw_enabled = None
 
 
         self.rate = 50 # Rate in Hz
@@ -64,12 +65,20 @@ class DBWNode(object):
                                          BrakeCmd, queue_size=1)
 
         # TODO: Create `TwistController` object
-        self.controller = Controller()
+        self.controller = Controller(
+            vehicle_mass = vehicle_mass,
+            fuel_capacity = fuel_capacity,
+            brake_deadband = brake_deadband,
+            decel_limit = decel_limit,
+            accel_limit = accel_limit,
+            wheel_radius = wheel_radius,
+            rate = self.rate
+            )
 
         # TODO: Subscribe to all the topics you need to
         rospy.Subscriber('twist_cmd', TwistStamped, self.twistcmd_cb)
         rospy.Subscriber('/current_velocity', TwistStamped, self.cur_vel_cb)
-        rospy.Subscriber('/vehicle/dbw_enabled', Bool, self.dwb_enabled_cb)
+        rospy.Subscriber('/vehicle/dbw_enabled', Bool, self.dbw_enabled_cb)
 
 
 
@@ -78,6 +87,9 @@ class DBWNode(object):
     def loop(self):
         rate = rospy.Rate(self.rate)
         while not rospy.is_shutdown():
+
+            if(!self.linear_velocity_current or self.linear_velocity_future == None or !self.dbw_enabled):
+                continue
             # TODO: Get predicted throttle, brake, and steering using `twist_controller`
             # You should only publish the control commands if dbw is enabled
             # throttle, brake, steering = self.controller.control(<proposed linear velocity>,
@@ -87,6 +99,17 @@ class DBWNode(object):
             #                                                     <any other argument you need>)
             # if <dbw is enabled>:
             #   self.publish(throttle, brake, steer)
+            throttle, brake, steer = self.controller.control(
+                linear_velocity_future = self.linear_velocity_future,
+                angular_velocity_future = self.angular_velocity_future,
+                linear_velocity_current = self.linear_velocity_current,
+                angular_velocity_future = self.angular_velocity_future, 
+                acceleration_current = self.acceleration_current
+                )
+
+            self.publish(throttle, brake, steer)
+
+
             rate.sleep()
 
     def publish(self, throttle, brake, steer):
@@ -116,15 +139,17 @@ class DBWNode(object):
 
     # TODO: Implement
     def cur_vel_cb(self, msg):
+        if (self.linear_velocity_current is not None):
+            self.current_acceleration = self.rate * (self.linear_velocity_current - msg.twist.linear.x)
         self.linear_velocity_current = msg.twist.linear.x
         self.angular_velocity_future = mst.twist.angular.z
 
 
     # TODO: Implement
-    def dwb_enabled_cb(self, msg)
-        self.dwb_enabled = msg.data
+    def dbw_enabled_cb(self, msg)
+        self.dbw_enabled = msg.data
 
-        if (!self.dwb_enabled):
+        if (!self.dbw_enabled):
             self.controller.reset()
         
         
