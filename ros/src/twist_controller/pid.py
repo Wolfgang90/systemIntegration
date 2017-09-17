@@ -1,3 +1,4 @@
+from lowpass import LowPassFilter
 
 MIN_NUM = float('-inf')
 MAX_NUM = float('inf')
@@ -12,6 +13,7 @@ class PID(object):
         self.max = mx
 
         self.int_val = self.last_int_val = self.last_error = 0.
+	self.lp_filter = LowPassFilter(5, 2)
 
     def reset(self):
         self.int_val = 0.0
@@ -22,6 +24,7 @@ class PID(object):
 
         integral = self.int_val + error * sample_time;
         derivative = (error - self.last_error) / sample_time;
+	derivative = self.lp_filter.filt(derivative)
 
         y = self.kp * error + self.ki * self.int_val + self.kd * derivative;
         val = max(self.min, min(y, self.max))
