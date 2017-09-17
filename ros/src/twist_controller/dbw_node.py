@@ -117,6 +117,7 @@ class DBWNode(object):
             rate.sleep()
 
     def publish(self, throttle, brake, steer):
+        rospy.loginfo('DBWNode: Publisher started with: throttle -> %.2f     brake -> %.2f     steer -> %.2f', throttle, brake, steer)
         tcmd = ThrottleCmd()
         tcmd.enable = True
         tcmd.pedal_cmd_type = ThrottleCmd.CMD_PERCENT
