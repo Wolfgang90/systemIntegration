@@ -58,7 +58,7 @@ class WaypointUpdater(object):
         # Step 1: Update of self.pose
         ##########
         self.pose = msg.pose
-        rospy.loginfo('WaypointUpdater: Updated pose - x: %.2f - y: %.2f',self.pose.position.x,self.pose.position.y)
+        # rospy.loginfo('WaypointUpdater: Updated pose - x: %.2f - y: %.2f',self.pose.position.x,self.pose.position.y)
         
         ##########
         # Step 2: Publication of the waypoints ahead, which is supposed to be in this function, 
@@ -94,7 +94,7 @@ class WaypointUpdater(object):
             
             # Publish waypoints ahead
             self.final_waypoints_pub.publish(wps_ahead)
-            rospy.loginfo('WaypointUpdater: Published waypoints ahead, first waypoint - x: %.2f - y: %.2f',wps_ahead.waypoints[0].pose.pose.position.x,wps_ahead.waypoints[0].pose.pose.position.y)
+            # rospy.loginfo('WaypointUpdater: Published waypoints ahead, first waypoint - x: %.2f - y: %.2f',wps_ahead.waypoints[0].pose.pose.position.x,wps_ahead.waypoints[0].pose.pose.position.y)
 
 
     def waypoints_cb(self, waypoints):
@@ -104,7 +104,7 @@ class WaypointUpdater(object):
         """
 
         self.base_waypoints = waypoints.waypoints
-        rospy.loginfo('WaypointUpdater: Updated with current waypoints')
+        # rospy.loginfo('WaypointUpdater: Updated with current waypoints')
 
 
     def traffic_cb(self, msg):

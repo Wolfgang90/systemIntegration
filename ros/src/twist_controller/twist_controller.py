@@ -33,13 +33,13 @@ class Controller(object):
         vel_gap = linear_velocity_future - linear_velocity_current
 
         acceleration = self.lin_vel_pid.step(vel_gap,self.time)
-        steer = self. ang_vel_pid.step(angular_velocity_future, self.time)
+        steer = self.ang_vel_pid.step(angular_velocity_future, self.time)
 
         if(acceleration < 0):
             self.accel_pid.reset()
             throttle = 0
         else:
-            self.accel_pid.step(acceleration - acceleration_current, self.time) 
+            throttle = self.accel_pid.step(acceleration - acceleration_current, self.time) 
 
         if(acceleration < -abs(self.brake_deadband)):
             brake = acceleration * self.mass * self.wheel_radius
