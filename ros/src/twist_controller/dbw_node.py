@@ -56,7 +56,7 @@ class DBWNode(object):
         self.dbw_enabled = None
 
 
-        self.rate = 50 # Rate in Hz
+        self.rate = 10 # Rate in Hz
 
         self.steer_pub = rospy.Publisher('/vehicle/steering_cmd',
                                          SteeringCmd, queue_size=1)
